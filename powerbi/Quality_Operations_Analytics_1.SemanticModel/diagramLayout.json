@@ -1,0 +1,125 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Dim_Auditor",
+          "nodeLineageTag": "83cdb0ca-6e31-4e8f-9b0c-3ea9caf3884e",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 846.26758552021033,
+            "y": 0
+          },
+          "nodeIndex": "Dim_Date",
+          "nodeLineageTag": "3bddec5c-3fd7-403d-a597-a78c377aaf64",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 831.81170560199689,
+            "y": 332.99593586410469
+          },
+          "nodeIndex": "Dim_Process",
+          "nodeLineageTag": "88db05a8-22e6-4df3-bb2d-ad11e7a2116e",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 342.42107248975265
+          },
+          "nodeIndex": "Fact_OperationalAudits",
+          "nodeLineageTag": "3d9cea00-eb31-4002-9f31-4b834bb61e6b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 554.26758552021045,
+            "y": 0
+          },
+          "nodeIndex": "Fact_OperationalTargets",
+          "nodeLineageTag": "0952a0c5-8eb0-47c7-9128-0d897a6d8bae",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 284.13145470063193,
+            "y": 62.878216298557732
+          },
+          "nodeIndex": "Fact_QualityAudits",
+          "nodeLineageTag": "1ed8ca64-b6cb-4163-aea4-203ec3322591",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 453.06758094257361,
+            "y": 522.81052708960283
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "8d350f9a-46e5-48a7-b4ae-5587d8da1fbe",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1130.2675855202103,
+            "y": 221.21053624487632
+          },
+          "nodeIndex": "Dim_DefectType",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

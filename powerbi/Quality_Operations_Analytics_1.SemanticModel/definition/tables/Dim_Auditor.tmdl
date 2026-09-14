@@ -1,0 +1,84 @@
+table Dim_Auditor
+	lineageTag: 83cdb0ca-6e31-4e8f-9b0c-3ea9caf3884e
+
+	column AuditorID
+		dataType: int64
+		formatString: 0
+		lineageTag: 6ea84e08-f9ba-4e0d-81b9-fcd76b732df1
+		summarizeBy: none
+		sourceColumn: AuditorID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditorName
+		dataType: string
+		lineageTag: 6c16ae3c-e706-4b98-a788-2ac93039d926
+		summarizeBy: none
+		sourceColumn: AuditorName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Role
+		dataType: string
+		lineageTag: da13721a-d63c-4096-a198-4dd128a35ff8
+		summarizeBy: none
+		sourceColumn: Role
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shift
+		dataType: string
+		lineageTag: 5a251a7f-ce26-402c-a1f6-ea28c6185b88
+		summarizeBy: none
+		sourceColumn: Shift
+
+		annotation SummarizationSetBy = Automatic
+
+	column Team
+		dataType: string
+		lineageTag: 7f334ea4-05d9-4fbd-9dff-13d0f1529128
+		summarizeBy: none
+		sourceColumn: Team
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExperienceLevel
+		dataType: string
+		lineageTag: c92a007b-0583-4a7a-a71c-feae76d300fc
+		summarizeBy: none
+		sourceColumn: ExperienceLevel
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrimaryProcessID
+		dataType: int64
+		formatString: 0
+		lineageTag: 07026be7-e9cf-42b7-939c-e635036c5778
+		summarizeBy: count
+		sourceColumn: PrimaryProcessID
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsActive
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: fda6207a-0fd2-47d5-8635-cabb1ae223d8
+		summarizeBy: none
+		sourceColumn: IsActive
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Auditor = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\qoa_portfolio\data\quality_operations_synthetic.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Dim_Auditor", Kind = "Table"]}[Data],
+				  #"Changed column type" = Table.TransformColumnTypes(#"Navigation 1",{{"AuditorID", Int64.Type}, {"AuditorName", type text}, {"Role", type text}, {"Shift", type text}, {"Team", type text}, {"ExperienceLevel", type text}, {"PrimaryProcessID", Int64.Type}, {"IsActive", type logical}})
+				in
+				  #"Changed column type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

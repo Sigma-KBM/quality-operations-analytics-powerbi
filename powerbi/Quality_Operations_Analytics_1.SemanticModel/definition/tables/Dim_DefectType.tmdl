@@ -1,0 +1,37 @@
+table Dim_DefectType
+	lineageTag: 21988c3b-4817-4efc-8305-a9b6391a7d50
+
+	column DefectType
+		lineageTag: a4702ca8-9266-44e2-b585-19db42a0a517
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DefectType]
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortOrder
+		formatString: 0
+		lineageTag: a0714107-5b6f-449f-963f-26108d739c70
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [SortOrder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_DefectType = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "DefectType", STRING,
+				    "SortOrder", INTEGER,
+				    {
+				        {"Performance", 1},
+				        {"Functional", 2},
+				        {"Appearance", 3},
+				        {"Parking", 4}
+				    }
+				)
+
+	annotation PBI_Id = 7cda5939c767452aa415d9fecd4d14fc
+

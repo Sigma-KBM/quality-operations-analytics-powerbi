@@ -1,0 +1,18 @@
+# Power BI local/cache state
+**/.pbi/cache.abf
+**/.pbi/localSettings.json
+**/.pbi/editorSettings.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Temporary Office files
+~$*.xlsx
+~$*.xls
+
+# Local exports / scratch
+*.tmp
+*.bak

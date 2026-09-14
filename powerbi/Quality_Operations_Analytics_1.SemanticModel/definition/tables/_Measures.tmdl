@@ -1,0 +1,611 @@
+table _Measures
+	lineageTag: 8d350f9a-46e5-48a7-b4ae-5587d8da1fbe
+
+	measure 'Vehicles Audited' =
+			
+			DISTINCTCOUNT(Fact_QualityAudits[VehicleID])
+		formatString: 0
+		lineageTag: 8b389eb5-e48d-4744-9fa1-14f9d595dc19
+
+	measure 'Accessories Audited' =
+			
+			SUM(Fact_QualityAudits[AccessoriesAudited])
+		formatString: 0
+		lineageTag: b9ac1784-8f9e-4467-9fe4-4e76ed7ed673
+
+	measure 'Accessory Defects' =
+			
+			SUM(Fact_QualityAudits[AccessoryDefects])
+		formatString: 0
+		lineageTag: 01afec80-55fa-4480-80d3-0aa2e53e7be1
+
+	measure 'Performance Defects' =
+			
+			SUM(Fact_QualityAudits[PerformanceDefects])
+		formatString: 0
+		lineageTag: 69ee313c-05a9-4f18-b627-c19a5553977b
+
+	measure 'Functional Defects' =
+			
+			SUM(Fact_QualityAudits[FunctionalDefects])
+		formatString: 0
+		lineageTag: 9fd00520-91c7-484f-a13d-ea8cb8854905
+
+	measure 'Appearance Defects' =
+			
+			SUM(Fact_QualityAudits[AppearanceDefects])
+		formatString: 0
+		lineageTag: 2a4a3393-7445-44b3-8934-c6c7ad4259fa
+
+	measure 'Parking Defects' =
+			
+			SUM(Fact_QualityAudits[ParkingDefects])
+		formatString: 0
+		lineageTag: 158eb602-fe47-46a4-80a2-63ae17a31f8a
+
+	measure 'Total Defects' =
+			
+			SUM(Fact_QualityAudits[TotalDefects])
+		formatString: 0
+		lineageTag: 92daa493-6c40-4041-93f4-5cf218242bb9
+
+	measure DPV =
+			
+			DIVIDE(
+			    [Total Defects],
+			    [Vehicles Audited],
+			    0
+			)
+		lineageTag: 7db9c79f-e3ad-4936-af13-7909065cbf25
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure ADR =
+			
+			DIVIDE(
+			    [Accessory Defects],
+			    [Accessories Audited],
+			    0
+			) * 100
+		lineageTag: 01921b00-bdfc-4abf-bbf7-da3fac02fd1f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'DPV Target' = 0.14
+		formatString: #,0.00
+		lineageTag: ca11f7a7-de46-41cb-888f-422b7f755d6c
+
+	measure 'ADR Target' = 3.50
+		lineageTag: b75531a3-5d96-4bd8-88b0-c78bcc215576
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'DPV Variance' =
+			
+			[DPV] - [DPV Target]
+		lineageTag: bc041557-4fc2-4f2f-9b5a-67e6c28db720
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'ADR Variance' =
+			
+			[ADR] - [ADR Target]
+		lineageTag: 4c15a737-6a83-4d23-a236-b8f8bd54c87e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'DPV Yellow Tolerance' =
+			
+			CALCULATE(
+			    MAX(Fact_OperationalTargets[YellowTolerancePct]),
+			    Fact_OperationalTargets[MetricName] = "DPV",
+			    Fact_OperationalTargets[TargetLevel] = "Process",
+			    REMOVEFILTERS(Dim_Auditor)
+			)
+		lineageTag: 3135893e-a7e3-4374-8de8-95d014e2e297
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'DPV Red Tolerance' =
+			
+			CALCULATE(
+			    MAX(Fact_OperationalTargets[RedTolerancePct]),
+			    Fact_OperationalTargets[MetricName] = "DPV",
+			    Fact_OperationalTargets[TargetLevel] = "Process",
+			    REMOVEFILTERS(Dim_Auditor)
+			)
+		lineageTag: 3a7aad1c-51ad-41ca-8183-36048ca122f8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'DPV Status' =
+			
+			VAR ActualValue = [DPV]
+			VAR TargetValue = [DPV Target]
+			VAR YellowLimit =
+			    TargetValue * (1 + [DPV Yellow Tolerance])
+			VAR RedLimit =
+			    TargetValue * (1 + [DPV Red Tolerance])
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(ActualValue) || ISBLANK(TargetValue), BLANK(),
+			        ActualValue <= TargetValue, "GREEN",
+			        ActualValue <= YellowLimit, "YELLOW",
+			        ActualValue <= RedLimit, "RED",
+			        "RED"
+			    )
+		lineageTag: 8d2bec0c-a53f-4c33-b048-d0d7e1653409
+
+	measure 'ADR Yellow Tolerance' =
+			
+			CALCULATE(
+			    MAX(Fact_OperationalTargets[YellowTolerancePct]),
+			    Fact_OperationalTargets[MetricName] = "ADR",
+			    Fact_OperationalTargets[TargetLevel] = "Process",
+			    REMOVEFILTERS(Dim_Auditor)
+			)
+		lineageTag: 4e229d5f-3923-41a0-be09-ebd2e28fe1e2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'ADR Red Tolerance' =
+			
+			CALCULATE(
+			    MAX(Fact_OperationalTargets[RedTolerancePct]),
+			    Fact_OperationalTargets[MetricName] = "ADR",
+			    Fact_OperationalTargets[TargetLevel] = "Process",
+			    REMOVEFILTERS(Dim_Auditor)
+			)
+		lineageTag: 5f3c081a-653d-48f0-ab6e-7df322d9df14
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'ADR Status' =
+			
+			VAR ActualValue = [ADR]
+			VAR TargetValue = [ADR Target]
+			VAR YellowLimit =
+			    TargetValue * (1 + [ADR Yellow Tolerance])
+			VAR RedLimit =
+			    TargetValue * (1 + [ADR Red Tolerance])
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(ActualValue) || ISBLANK(TargetValue), BLANK(),
+			        ActualValue <= TargetValue, "GREEN",
+			        ActualValue <= YellowLimit, "YELLOW",
+			        ActualValue <= RedLimit, "RED",
+			        "RED"
+			    )
+		lineageTag: 3f0bf428-5054-45f1-8e50-1028c51aa147
+
+	measure 'Completed Audits' =
+			
+			SUM(Fact_OperationalAudits[CompletedAudits])
+		formatString: 0
+		lineageTag: 7a0dade7-0738-4932-8f88-59d17a1853a2
+
+	measure 'Load Line Actual' =
+			
+			CALCULATE(
+			    [Completed Audits],
+			    Dim_Process[ProcessName] = "Load Line"
+			)
+		formatString: 0
+		lineageTag: 5b6ab00c-f3a8-460e-8495-a5ca4f84c4e0
+
+	measure 'Outbound Actual' =
+			
+			CALCULATE(
+			    [Completed Audits],
+			    Dim_Process[ProcessName] = "Outbound"
+			)
+		formatString: 0
+		lineageTag: cb742ce2-913b-4820-8718-2c961be9c2e5
+
+	measure 'Load Line Target' =
+			
+			CALCULATE(
+			    SUM(Fact_OperationalTargets[TargetValue]),
+			    Fact_OperationalTargets[MetricName] = "Load Line Audits",
+			    Fact_OperationalTargets[TargetLevel] = "Process",
+			    REMOVEFILTERS(Dim_Auditor)
+			)
+		formatString: 0
+		lineageTag: 5e9d5ef3-d716-4990-a071-a1300cfcb7b2
+
+	measure 'Outbound Target' =
+			
+			CALCULATE(
+			    SUM(Fact_OperationalTargets[TargetValue]),
+			    Fact_OperationalTargets[MetricName] = "Outbound Audits",
+			    Fact_OperationalTargets[TargetLevel] = "Process",
+			    REMOVEFILTERS(Dim_Auditor)
+			)
+		formatString: 0
+		lineageTag: d2978d80-df20-4a8d-822f-a2fbf38ac5c5
+
+	measure 'Load Line Gap' =
+			
+			[Load Line Actual] - [Load Line Target]
+		formatString: 0
+		lineageTag: d7080d71-4ffe-4589-95a1-f985fd2aa663
+
+	measure 'Outbound Gap' =
+			
+			[Outbound Actual] - [Outbound Target]
+		formatString: 0
+		lineageTag: 7d784117-cfc2-4fad-be6c-d09609410a39
+
+	measure 'Load Line Completion %' =
+			
+			DIVIDE(
+			    [Load Line Actual],
+			    [Load Line Target],
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 27395319-8fd1-414c-a0bb-301dd3b2b6ed
+
+	measure 'Outbound Completion %' =
+			
+			DIVIDE(
+			    [Outbound Actual],
+			    [Outbound Target],
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: a1e63938-b8a6-4fa0-a866-a138ef465854
+
+	measure 'Load Line Yellow Tolerance' =
+			
+			CALCULATE(
+			    MAX(Fact_OperationalTargets[YellowTolerancePct]),
+			    Fact_OperationalTargets[MetricName] = "Load Line Audits",
+			    Fact_OperationalTargets[TargetLevel] = "Process",
+			    REMOVEFILTERS(Dim_Auditor)
+			)
+		lineageTag: 84c2ece8-369c-461e-847a-89ee742c2cfa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Load Line Red Tolerance' =
+			
+			CALCULATE(
+			    MAX(Fact_OperationalTargets[RedTolerancePct]),
+			    Fact_OperationalTargets[MetricName] = "Load Line Audits",
+			    Fact_OperationalTargets[TargetLevel] = "Process",
+			    REMOVEFILTERS(Dim_Auditor)
+			)
+		lineageTag: 5f533159-5feb-4039-8119-635d4bfc301a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Load Line Status' =
+			
+			VAR ActualValue = [Load Line Actual]
+			VAR TargetValue = [Load Line Target]
+			VAR YellowLimit =
+			    TargetValue * (1 - [Load Line Yellow Tolerance])
+			VAR RedLimit =
+			    TargetValue * (1 - [Load Line Red Tolerance])
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(ActualValue) || ISBLANK(TargetValue), BLANK(),
+			        ActualValue >= TargetValue, "GREEN",
+			        ActualValue >= YellowLimit, "YELLOW",
+			        ActualValue >= RedLimit, "RED",
+			        "RED"
+			    )
+		lineageTag: e96adf32-bb49-4cf4-b5c6-3da95be50d17
+
+	measure 'Outbound Yellow Tolerance' =
+			
+			CALCULATE(
+			    MAX(Fact_OperationalTargets[YellowTolerancePct]),
+			    Fact_OperationalTargets[MetricName] = "Outbound Audits",
+			    Fact_OperationalTargets[TargetLevel] = "Process",
+			    REMOVEFILTERS(Dim_Auditor)
+			)
+		lineageTag: 90d8fe4b-df20-4a56-9842-a177d76680ef
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Outbound Red Tolerance' =
+			
+			CALCULATE(
+			    MAX(Fact_OperationalTargets[RedTolerancePct]),
+			    Fact_OperationalTargets[MetricName] = "Outbound Audits",
+			    Fact_OperationalTargets[TargetLevel] = "Process",
+			    REMOVEFILTERS(Dim_Auditor)
+			)
+		lineageTag: 6a6b788d-d788-4ffc-a803-7e725516e3bf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Outbound Status' =
+			
+			VAR ActualValue = [Outbound Actual]
+			VAR TargetValue = [Outbound Target]
+			VAR YellowLimit =
+			    TargetValue * (1 - [Outbound Yellow Tolerance])
+			VAR RedLimit =
+			    TargetValue * (1 - [Outbound Red Tolerance])
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(ActualValue) || ISBLANK(TargetValue), BLANK(),
+			        ActualValue >= TargetValue, "GREEN",
+			        ActualValue >= YellowLimit, "YELLOW",
+			        ActualValue >= RedLimit, "RED",
+			        "RED"
+			    )
+		lineageTag: 3b028c5f-5c6c-417f-b03c-36fd008afbf3
+
+	measure 'Auditor Actual' =
+			
+			[Completed Audits]
+		formatString: #,0
+		lineageTag: 4adbf119-86a2-4e5f-b18e-12df05a8a5c4
+
+	measure 'Auditor Target' =
+			
+			CALCULATE(
+			    SUM(Fact_OperationalTargets[TargetValue]),
+			    Fact_OperationalTargets[TargetLevel] = "Auditor",
+			    Fact_OperationalTargets[MetricName] = "Auditor Audits"
+			)
+		formatString: #,0
+		lineageTag: 0c435711-c968-4888-9c09-97e2c08444b8
+
+	measure 'Auditor Gap' =
+			
+			[Auditor Actual] - [Auditor Target]
+		formatString: #,0
+		lineageTag: c710b495-6db9-40a8-86fe-738b46e174a8
+
+	measure 'Auditor Compliance %' =
+			
+			DIVIDE(
+			    [Auditor Actual],
+			    [Auditor Target],
+			    0
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 2f455d71-03b2-48f7-a3bf-28ebcd56df3b
+
+	measure 'Auditor Status' =
+			
+			VAR Compliance = [Auditor Compliance %]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK([Auditor Target]), BLANK(),
+			        Compliance >= 1, "GREEN",
+			        Compliance >= 0.90, "YELLOW",
+			        "RED"
+			    )
+		lineageTag: 246a893d-7ad6-4326-b917-c28a17ed8eb0
+
+	measure 'Overall Quality Operations Status' =
+			
+			VAR DPVStatus = [DPV Status]
+			VAR ADRStatus = [ADR Status]
+			VAR LoadLineStatus = [Load Line Status]
+			VAR OutboundStatus = [Outbound Status]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(DPVStatus)
+			            && ISBLANK(ADRStatus)
+			            && ISBLANK(LoadLineStatus)
+			            && ISBLANK(OutboundStatus), BLANK(),
+			
+			        DPVStatus = "RED"
+			            || ADRStatus = "RED"
+			            || LoadLineStatus = "RED"
+			            || OutboundStatus = "RED", "RED",
+			
+			        DPVStatus = "YELLOW"
+			            || ADRStatus = "YELLOW"
+			            || LoadLineStatus = "YELLOW"
+			            || OutboundStatus = "YELLOW", "YELLOW",
+			
+			        "GREEN"
+			    )
+		lineageTag: 54e8dee2-1b90-4acc-b07d-6f1c50ee030c
+
+	measure 'Overall Quality Operations Status Color' =
+			
+			SWITCH(
+			    [Overall Quality Operations Status],
+			    "GREEN", "#008000",
+			    "YELLOW", "#FFC000",
+			    "RED", "#FF0000",
+			    "#666666"
+			)
+		lineageTag: 8a820101-126d-4b38-ba8b-b079ef141de5
+
+	measure 'Defects by Type' =
+			
+			SWITCH(
+			    SELECTEDVALUE(Dim_DefectType[DefectType]),
+			    "Performance", [Performance Defects],
+			    "Functional", [Functional Defects],
+			    "Appearance", [Appearance Defects],
+			    "Parking", [Parking Defects],
+			    BLANK()
+			)
+		formatString: 0
+		lineageTag: 4be93c27-a1da-41c4-9a7d-5b166ad2606b
+
+	measure 'Defect Rank' =
+			
+			RANKX(
+			    ALLSELECTED(Dim_DefectType[DefectType]),
+			    [Defects by Type],
+			    ,
+			    DESC,
+			    DENSE
+			)
+		formatString: 0
+		lineageTag: a3ac4924-cc1e-4085-946f-d56169886ac6
+
+	measure 'Total Defects Selected' =
+			
+			SUMX(
+			    ALLSELECTED(Dim_DefectType[DefectType]),
+			    [Defects by Type]
+			)
+		formatString: 0
+		lineageTag: dde028f6-7be8-439c-902c-6e1766fff15c
+
+	measure 'Pareto Cumulative %' =
+			
+			DIVIDE(
+			    [Pareto Cumulative Defects],
+			    [Total Defects Selected],
+			    0
+			)
+		lineageTag: 187571e7-e12b-4232-8d62-1db4c94949c5
+
+	measure 'Pareto Cumulative Defects' =
+			
+			VAR CurrentRank =
+			    [Defect Rank]
+			RETURN
+			    SUMX(
+			        FILTER(
+			            ALLSELECTED(Dim_DefectType[DefectType]),
+			            RANKX(
+			                ALLSELECTED(Dim_DefectType[DefectType]),
+			                [Defects by Type],
+			                ,
+			                DESC,
+			                DENSE
+			            ) <= CurrentRank
+			        ),
+			        [Defects by Type]
+			    )
+		formatString: 0
+		lineageTag: b1a5ea32-c208-41f0-9d79-8fbae485512c
+
+	measure 'Load Line Gauge Start' = 0
+		formatString: 0
+		lineageTag: 74276008-3a10-4155-9a46-1edc80a5f050
+
+	measure 'Load Line Gauge Yellow Start' =
+			
+			VAR TargetValue = [Load Line Target]
+			RETURN
+			    IF(
+			        ISBLANK(TargetValue),
+			        BLANK(),
+			        TargetValue * 0.95
+			    )
+		lineageTag: 09678674-4a5a-493c-b81d-59ee2d9bd39e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Load Line Gauge Green Start' =
+			
+			VAR TargetValue = [Load Line Target]
+			RETURN
+			    IF(
+			        ISBLANK(TargetValue),
+			        BLANK(),
+			        TargetValue
+			    )
+		lineageTag: 8c4de957-fc0f-4a12-93e0-c811b6df02b1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Load Line Gauge End' =
+			
+			VAR TargetValue = [Load Line Target]
+			VAR ActualValue = [Load Line Actual]
+			RETURN
+			    IF(
+			        ISBLANK(TargetValue),
+			        BLANK(),
+			        MAX(
+			            TargetValue * 1.20,
+			            ActualValue * 1.05
+			        )
+			    )
+		lineageTag: 1d80b905-7ad4-40c4-abf5-cd25f4903159
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Outbound Gauge Start' = 0
+		formatString: 0
+		lineageTag: ba68f47b-e215-4c07-a52d-3e9827c62ca7
+
+	measure 'Outbound Gauge Yellow Start' =
+			
+			VAR TargetValue = [Outbound Target]
+			RETURN
+			    IF(
+			        ISBLANK(TargetValue),
+			        BLANK(),
+			        TargetValue * 0.95
+			    )
+		lineageTag: 8548df14-43a8-4c3a-8f4d-0d71fc9a77b7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Outbound Gauge Green Start' =
+			
+			VAR TargetValue = [Outbound Target]
+			RETURN
+			    IF(
+			        ISBLANK(TargetValue),
+			        BLANK(),
+			        TargetValue
+			    )
+		lineageTag: 076fc6e3-eee7-4279-9c59-8ef5631ffa27
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Outbound Gauge End' =
+			
+			VAR TargetValue = [Outbound Target]
+			VAR ActualValue = [Outbound Actual]
+			RETURN
+			    IF(
+			        ISBLANK(TargetValue),
+			        BLANK(),
+			        MAX(
+			            TargetValue * 1.20,
+			            ActualValue * 1.05
+			        )
+			    )
+		lineageTag: 6b4721d5-1b6b-4d2f-8cb1-2c85198e9c13
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column1
+		dataType: string
+		isHidden
+		lineageTag: ffab489e-763a-48ca-b643-b13dd612ab5b
+		summarizeBy: none
+		sourceColumn: Column1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				  Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t])
+				in
+				  Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

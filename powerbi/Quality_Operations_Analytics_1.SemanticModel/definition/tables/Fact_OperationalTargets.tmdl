@@ -1,0 +1,132 @@
+table Fact_OperationalTargets
+	lineageTag: 0952a0c5-8eb0-47c7-9128-0d897a6d8bae
+
+	column TargetID
+		dataType: int64
+		formatString: 0
+		lineageTag: 572d4ca5-4494-4ed2-a07b-d4c22f18237d
+		summarizeBy: count
+		sourceColumn: TargetID
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekStartDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 6303ee57-658e-46e6-aeac-239d60fa5b66
+		summarizeBy: none
+		sourceColumn: WeekStartDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProcessID
+		dataType: int64
+		formatString: 0
+		lineageTag: 795d5c0c-d310-41dc-87eb-8ede9e20759d
+		summarizeBy: none
+		sourceColumn: ProcessID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditorID
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e7d702a-12af-441c-b334-824ae4fe85c4
+		summarizeBy: none
+		sourceColumn: AuditorID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TargetLevel
+		dataType: string
+		lineageTag: 4125a684-79b1-4c82-b13b-b84fd4fa631f
+		summarizeBy: none
+		sourceColumn: TargetLevel
+
+		annotation SummarizationSetBy = Automatic
+
+	column MetricName
+		dataType: string
+		lineageTag: 36978f44-38cb-4cce-bfd3-210f8801c65d
+		summarizeBy: none
+		sourceColumn: MetricName
+
+		annotation SummarizationSetBy = Automatic
+
+	column TargetValue
+		dataType: double
+		lineageTag: 5e9880cf-edd4-4595-af3e-c0ae73c3a83e
+		summarizeBy: sum
+		sourceColumn: TargetValue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TargetUnit
+		dataType: string
+		lineageTag: 80075088-777d-4bc5-ab6b-04972a1643ea
+		summarizeBy: none
+		sourceColumn: TargetUnit
+
+		annotation SummarizationSetBy = Automatic
+
+	column LowerIsBetter
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5502e7a0-a3ca-427b-a784-2b5a3716bc38
+		summarizeBy: none
+		sourceColumn: LowerIsBetter
+
+		annotation SummarizationSetBy = Automatic
+
+	column YellowTolerancePct
+		dataType: double
+		lineageTag: 256cec57-17c2-45c1-9905-61725a795325
+		summarizeBy: sum
+		sourceColumn: YellowTolerancePct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RedTolerancePct
+		dataType: double
+		lineageTag: 25f88bc0-95dc-4607-bdbc-7d909381c589
+		summarizeBy: sum
+		sourceColumn: RedTolerancePct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Role
+		dataType: string
+		lineageTag: 9000f3f0-6fec-4b16-9347-9b612734daf1
+		summarizeBy: none
+		sourceColumn: Role
+
+		annotation SummarizationSetBy = Automatic
+
+	column DataSource
+		dataType: string
+		lineageTag: 86e5d3c0-3bfb-411d-8e6e-6a300c9a98b7
+		summarizeBy: none
+		sourceColumn: DataSource
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_OperationalTargets = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\qoa_portfolio\data\quality_operations_synthetic.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Fact_OperationalTargets", Kind = "Table"]}[Data],
+				  #"Changed column type" = Table.TransformColumnTypes(#"Navigation 1",{{"TargetID", Int64.Type}, {"WeekStartDateKey", Int64.Type}, {"ProcessID", Int64.Type}, {"TargetLevel", type text}, {"MetricName", type text}, {"TargetValue", type number}, {"TargetUnit", type text}, {"LowerIsBetter", type logical}, {"YellowTolerancePct", type number}, {"RedTolerancePct", type number}, {"Role", type text}, {"DataSource", type text}, {"AuditorID", Int64.Type}})
+				in
+				  #"Changed column type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

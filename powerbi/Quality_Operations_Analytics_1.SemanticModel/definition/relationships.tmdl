@@ -1,0 +1,36 @@
+relationship AutoDetected_0de7db99-dc74-4092-aa53-c8354f8077fa
+	fromColumn: Fact_QualityAudits.AuditorID
+	toColumn: Dim_Auditor.AuditorID
+
+relationship AutoDetected_5c54d720-0361-45c6-bed6-656b95e1cd95
+	fromColumn: Fact_OperationalAudits.AuditorID
+	toColumn: Dim_Auditor.AuditorID
+
+relationship AutoDetected_c2cce1ad-f9ec-47c0-bfef-7badd4e4fea4
+	fromColumn: Fact_OperationalTargets.AuditorID
+	toColumn: Dim_Auditor.AuditorID
+
+relationship AutoDetected_05021ae2-9a5d-436d-a444-782bb8ce1b26
+	fromColumn: Fact_QualityAudits.ProcessID
+	toColumn: Dim_Process.ProcessID
+
+relationship AutoDetected_a8e1f03d-de1c-4490-94d8-94909746a99d
+	fromColumn: Fact_OperationalAudits.ProcessID
+	toColumn: Dim_Process.ProcessID
+
+relationship AutoDetected_8b41afae-926e-414c-95d8-534172700a30
+	fromColumn: Fact_OperationalTargets.ProcessID
+	toColumn: Dim_Process.ProcessID
+
+relationship 05de0c58-80d9-f871-ed14-28800fba9458
+	fromColumn: Fact_QualityAudits.AuditDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship 1d46d74f-1f56-baae-f23f-896a1fe47a5a
+	fromColumn: Fact_OperationalAudits.AuditDateKey
+	toColumn: Dim_Date.DateKey
+
+relationship 0a04b1cb-2eeb-5851-3d67-2d6d92197980
+	fromColumn: Fact_OperationalTargets.WeekStartDateKey
+	toColumn: Dim_Date.DateKey
+

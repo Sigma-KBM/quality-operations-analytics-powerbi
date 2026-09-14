@@ -1,0 +1,369 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "8a4dec76f18cb95ded19",
+  "position": {
+    "x": 14,
+    "y": 297,
+    "z": 5000,
+    "height": 288,
+    "width": 272,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "eaTachometer6616D82ED23A4C048E1D3CD4604742ED",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Load Line Actual"
+                }
+              },
+              "queryRef": "_Measures.Load Line Actual",
+              "nativeQueryRef": "Load Line Actual"
+            }
+          ]
+        },
+        "StartValue": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Load Line Gauge Start"
+                }
+              },
+              "queryRef": "_Measures.Load Line Gauge Start",
+              "nativeQueryRef": "Load Line Gauge Start"
+            }
+          ]
+        },
+        "EndValue": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Load Line Gauge End"
+                }
+              },
+              "queryRef": "_Measures.Load Line Gauge End",
+              "nativeQueryRef": "Load Line Gauge End"
+            }
+          ]
+        },
+        "TargetValue": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Load Line Target"
+                }
+              },
+              "queryRef": "_Measures.Load Line Target",
+              "nativeQueryRef": "Load Line Target"
+            }
+          ]
+        },
+        "Range2StartValue": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Load Line Gauge Yellow Start"
+                }
+              },
+              "queryRef": "_Measures.Load Line Gauge Yellow Start",
+              "nativeQueryRef": "Load Line Gauge Yellow Start"
+            }
+          ]
+        },
+        "Range3StartValue": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Load Line Gauge Green Start"
+                }
+              },
+              "queryRef": "_Measures.Load Line Gauge Green Start",
+              "nativeQueryRef": "Load Line Gauge Green Start"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measures"
+                  }
+                },
+                "Property": "Load Line Actual"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "axis": [
+        {
+          "properties": {
+            "startValue": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "endValue": {
+              "expr": {
+                "Literal": {
+                  "Value": "7500D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "range1": [
+        {
+          "properties": {
+            "rangeColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FF0000'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "calloutPercent": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "invert": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "percentType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Range2Start'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "range3": [
+        {
+          "properties": {
+            "rangeColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#008000'"
+                    }
+                  }
+                }
+              }
+            },
+            "startValue": {
+              "expr": {
+                "Literal": {
+                  "Value": "6014D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "range2": [
+        {
+          "properties": {
+            "startValue": {
+              "expr": {
+                "Literal": {
+                  "Value": "5713D"
+                }
+              }
+            },
+            "rangeColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFF00'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "target": [
+        {
+          "properties": {
+            "innerRadiusRatio": {
+              "expr": {
+                "Literal": {
+                  "Value": "49D"
+                }
+              }
+            },
+            "textColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Load Line Audit'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Segoe UI Bold'', wf_segoe-ui_bold, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Target: 6,014'"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'right'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "e4ea2ffacfa39b4d2d01"
+}

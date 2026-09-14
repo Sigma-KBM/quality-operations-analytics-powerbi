@@ -1,0 +1,141 @@
+table Fact_OperationalAudits
+	lineageTag: 3d9cea00-eb31-4002-9f31-4b834bb61e6b
+
+	column OperationalAuditID
+		dataType: int64
+		formatString: 0
+		lineageTag: 0df4cd76-3d96-4dbb-a4cb-5f60654b977a
+		summarizeBy: count
+		sourceColumn: OperationalAuditID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 41e005e3-d551-411e-a6e4-e7c451a24b94
+		summarizeBy: none
+		sourceColumn: AuditDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditorID
+		dataType: int64
+		formatString: 0
+		lineageTag: 89721124-c67e-4135-a079-c9b2534ab6c2
+		summarizeBy: none
+		sourceColumn: AuditorID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProcessID
+		dataType: int64
+		formatString: 0
+		lineageTag: b5507e6c-aeef-4b41-84fe-2a4da6f06282
+		summarizeBy: none
+		sourceColumn: ProcessID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shift
+		dataType: string
+		lineageTag: bc2126f3-1bff-4e2f-8767-92d3316cd294
+		summarizeBy: none
+		sourceColumn: Shift
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkItemID
+		dataType: string
+		lineageTag: ebe32bac-5be5-4bba-8ffe-ef4c8999052c
+		summarizeBy: none
+		sourceColumn: WorkItemID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompletedAudits
+		dataType: int64
+		formatString: 0
+		lineageTag: 0305735a-7193-44d1-a147-899c74fba9a7
+		summarizeBy: sum
+		sourceColumn: CompletedAudits
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitsReviewed
+		dataType: int64
+		formatString: 0
+		lineageTag: 7571910e-6449-4feb-89d5-4350257f7033
+		summarizeBy: sum
+		sourceColumn: UnitsReviewed
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExceptionsFound
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b51087d-952c-4633-8d35-388dacae9d0f
+		summarizeBy: sum
+		sourceColumn: ExceptionsFound
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReworkRequired
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2ce2211d-f7d1-4fe8-8204-7a3c4638303c
+		summarizeBy: none
+		sourceColumn: ReworkRequired
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComplianceScorePct
+		dataType: double
+		lineageTag: 4eecbdfc-1c8f-4149-812a-e5f1289ba31e
+		summarizeBy: sum
+		sourceColumn: ComplianceScorePct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AuditDurationMin
+		dataType: double
+		lineageTag: 0003363b-7aa7-45a4-a106-3fc76caf4771
+		summarizeBy: sum
+		sourceColumn: AuditDurationMin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AuditStatus
+		dataType: string
+		lineageTag: 5142b15c-12f1-40e4-82b8-dd7f334ba4ac
+		summarizeBy: none
+		sourceColumn: AuditStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column DataSource
+		dataType: string
+		lineageTag: cc1180ff-7693-4149-bdc7-379d3fb30854
+		summarizeBy: none
+		sourceColumn: DataSource
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_OperationalAudits = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\qoa_portfolio\data\quality_operations_synthetic.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Fact_OperationalAudits", Kind = "Table"]}[Data],
+				  #"Changed column type" = Table.TransformColumnTypes(#"Navigation 1", {{"OperationalAuditID", Int64.Type}, {"AuditDateKey", Int64.Type}, {"AuditorID", Int64.Type}, {"ProcessID", Int64.Type}, {"Shift", type text}, {"WorkItemID", type text}, {"CompletedAudits", Int64.Type}, {"UnitsReviewed", Int64.Type}, {"ExceptionsFound", Int64.Type}, {"ReworkRequired", type logical}, {"ComplianceScorePct", type number}, {"AuditDurationMin", type number}, {"AuditStatus", type text}, {"DataSource", type text}})
+				in
+				  #"Changed column type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

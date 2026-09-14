@@ -1,0 +1,66 @@
+table Dim_Process
+	lineageTag: 88db05a8-22e6-4df3-bb2d-ad11e7a2116e
+
+	column ProcessID
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d8e2079-b0a4-4142-b77e-ed0dc94b8319
+		summarizeBy: none
+		sourceColumn: ProcessID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProcessName
+		dataType: string
+		lineageTag: 11715d4a-61b1-4544-b32c-98365b854661
+		summarizeBy: none
+		sourceColumn: ProcessName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProcessGroup
+		dataType: string
+		lineageTag: 36937088-99d6-4cf3-b6f5-05dc8639044d
+		summarizeBy: none
+		sourceColumn: ProcessGroup
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProcessDescription
+		dataType: string
+		lineageTag: c6f18ee1-2f6e-44c9-a698-0a0dd6336174
+		summarizeBy: none
+		sourceColumn: ProcessDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrimaryKPI
+		dataType: string
+		lineageTag: 42a7dc6c-3707-49ee-b39d-955d8c9cd22b
+		summarizeBy: none
+		sourceColumn: PrimaryKPI
+
+		annotation SummarizationSetBy = Automatic
+
+	column KPIDirection
+		dataType: string
+		lineageTag: 5bcb5f23-8f84-4532-a91e-2c2d7a220402
+		summarizeBy: none
+		sourceColumn: KPIDirection
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Process = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\qoa_portfolio\data\quality_operations_synthetic.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Dim_Process", Kind = "Table"]}[Data],
+				  #"Changed column type" = Table.TransformColumnTypes(#"Navigation 1", {{"ProcessID", Int64.Type}, {"ProcessName", type text}, {"ProcessGroup", type text}, {"ProcessDescription", type text}, {"PrimaryKPI", type text}, {"KPIDirection", type text}})
+				in
+				  #"Changed column type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

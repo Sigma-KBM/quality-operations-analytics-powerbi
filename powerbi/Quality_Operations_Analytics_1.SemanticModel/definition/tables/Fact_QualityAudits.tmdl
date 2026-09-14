@@ -1,0 +1,184 @@
+table Fact_QualityAudits
+	lineageTag: 1ed8ca64-b6cb-4163-aea4-203ec3322591
+
+	column QualityAuditID
+		dataType: int64
+		formatString: 0
+		lineageTag: fcba58c4-291b-4d2e-990f-a4fe8df11eb6
+		summarizeBy: count
+		sourceColumn: QualityAuditID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 74f26f4f-175a-4aad-aa7f-ca4797bb9abc
+		summarizeBy: none
+		sourceColumn: AuditDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditorID
+		dataType: int64
+		formatString: 0
+		lineageTag: 74f3bff9-ffd3-4e63-8d69-193142333bc6
+		summarizeBy: none
+		sourceColumn: AuditorID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProcessID
+		dataType: int64
+		formatString: 0
+		lineageTag: d12a8db1-d980-43a1-b39b-44cbb7db82c5
+		summarizeBy: none
+		sourceColumn: ProcessID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shift
+		dataType: string
+		lineageTag: 2736051e-fc47-491d-909f-f2230e899351
+		summarizeBy: none
+		sourceColumn: Shift
+
+		annotation SummarizationSetBy = Automatic
+
+	column VehicleID
+		dataType: string
+		lineageTag: 844aff0b-8c3c-4d82-a008-24f68c5a7b72
+		summarizeBy: none
+		sourceColumn: VehicleID
+
+		annotation SummarizationSetBy = Automatic
+
+	column VehiclesAudited
+		dataType: int64
+		formatString: 0
+		lineageTag: 3305fc74-71ec-4892-a8b7-790ccb94ee0b
+		summarizeBy: sum
+		sourceColumn: VehiclesAudited
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccessoriesAudited
+		dataType: int64
+		formatString: 0
+		lineageTag: 2697d06a-7703-4c6f-97e7-509b97fcc6f9
+		summarizeBy: sum
+		sourceColumn: AccessoriesAudited
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccessoriesPassed
+		dataType: int64
+		formatString: 0
+		lineageTag: 3dfb36c4-4400-463b-b73e-57b0b5b87cbc
+		summarizeBy: sum
+		sourceColumn: AccessoriesPassed
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccessoryDefects
+		dataType: int64
+		formatString: 0
+		lineageTag: 110fe011-f9ae-4ea3-a50a-e234f2a29482
+		summarizeBy: sum
+		sourceColumn: AccessoryDefects
+
+		annotation SummarizationSetBy = Automatic
+
+	column PerformanceDefects
+		dataType: int64
+		formatString: 0
+		lineageTag: 6703a9a1-1460-4787-bc0d-2e49ce15514e
+		summarizeBy: sum
+		sourceColumn: PerformanceDefects
+
+		annotation SummarizationSetBy = Automatic
+
+	column FunctionalDefects
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c774653-1c58-40bf-9fae-dcaee24df5cd
+		summarizeBy: sum
+		sourceColumn: FunctionalDefects
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppearanceDefects
+		dataType: int64
+		formatString: 0
+		lineageTag: f6f73a31-2056-48b5-b9ba-0e724184a85b
+		summarizeBy: sum
+		sourceColumn: AppearanceDefects
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParkingDefects
+		dataType: int64
+		formatString: 0
+		lineageTag: 639deb69-b2c4-41eb-b9f7-1105e68c4f1b
+		summarizeBy: sum
+		sourceColumn: ParkingDefects
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalDefects
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f28bdf3-de17-4548-bb1f-e266026c8c10
+		summarizeBy: sum
+		sourceColumn: TotalDefects
+
+		annotation SummarizationSetBy = Automatic
+
+	column QualityResult
+		dataType: string
+		lineageTag: 629a9cbb-f622-41e9-b13b-f1e295766118
+		summarizeBy: none
+		sourceColumn: QualityResult
+
+		annotation SummarizationSetBy = Automatic
+
+	column DefectSeverity
+		dataType: string
+		lineageTag: cd636803-7ec2-4db9-a848-92f26b27413b
+		summarizeBy: none
+		sourceColumn: DefectSeverity
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditDurationMin
+		dataType: double
+		lineageTag: 21720543-c00f-450f-a9bf-422f4c66a11b
+		summarizeBy: sum
+		sourceColumn: AuditDurationMin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DataSource
+		dataType: string
+		lineageTag: 177481d2-ebd0-4497-b865-bf5483189c07
+		summarizeBy: none
+		sourceColumn: DataSource
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_QualityAudits = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\qoa_portfolio\data\quality_operations_synthetic.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Fact_QualityAudits", Kind = "Table"]}[Data],
+				  #"Changed column type" = Table.TransformColumnTypes(#"Navigation 1", {{"QualityAuditID", Int64.Type}, {"AuditDateKey", Int64.Type}, {"AuditorID", Int64.Type}, {"ProcessID", Int64.Type}, {"Shift", type text}, {"VehicleID", type text}, {"VehiclesAudited", Int64.Type}, {"AccessoriesAudited", Int64.Type}, {"AccessoriesPassed", Int64.Type}, {"AccessoryDefects", Int64.Type}, {"PerformanceDefects", Int64.Type}, {"FunctionalDefects", Int64.Type}, {"AppearanceDefects", Int64.Type}, {"ParkingDefects", Int64.Type}, {"TotalDefects", Int64.Type}, {"QualityResult", type text}, {"DefectSeverity", type text}, {"AuditDurationMin", type number}, {"DataSource", type text}})
+				in
+				  #"Changed column type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
