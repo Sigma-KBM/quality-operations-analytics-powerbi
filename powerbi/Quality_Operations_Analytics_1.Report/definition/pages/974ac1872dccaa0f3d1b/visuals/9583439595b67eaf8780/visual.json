@@ -4,10 +4,10 @@
   "position": {
     "x": 32,
     "y": 496,
-    "z": 9000,
+    "z": 28007,
     "height": 192,
     "width": 912,
-    "tabOrder": 15000
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "lineChart",
@@ -103,6 +103,19 @@
               "expr": {
                 "Literal": {
                   "Value": "'center'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Completed audit volume by operational process and work shift.'"
                 }
               }
             }

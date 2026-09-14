@@ -4,7 +4,7 @@
   "position": {
     "x": 672,
     "y": 212,
-    "z": 13500,
+    "z": 15015,
     "height": 468,
     "width": 576,
     "tabOrder": 0
@@ -98,6 +98,19 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Defect totals by Performance, Functional, Appearance and Parking category.'"
                 }
               }
             }

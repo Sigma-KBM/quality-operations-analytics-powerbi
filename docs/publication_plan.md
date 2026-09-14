@@ -15,7 +15,9 @@
 5. Confirm the README screenshots render correctly on GitHub.
 6. Add repository topics such as `power-bi`, `dax`, `power-query`, `data-analytics`, `business-intelligence`, `data-visualization`, `star-schema`.
 7. Review whether MIT is the license you want before publishing; replace/remove it if not.
-8. Create a `v1.0` release only after a clean clone/open test.
+8. Run `python scripts/validate_portfolio.py` and resolve every failure.
+9. Check the public Git author identity/email and confirm it is intentional.
+10. Create a `v1.0` release only after a clean clone/open/refresh test.
 
 ## BTN Insights sequence
 
@@ -37,7 +39,16 @@ Publish after GitHub and preferably after the BTN Insights article so both URLs 
 
 - Reset filters unless the screenshot intentionally demonstrates a filter behavior.
 - Use a consistent Power BI canvas zoom.
-- Hide selection/format panes and visual selection borders.
-- Do not expose local file paths or account information.
+- Capture the report canvas in reading view or another clean presentation state.
+- Hide authoring, selection, data and format panes, visual headers, tooltips and selection borders.
+- Do not expose the Power BI account name, Windows username, local file paths, activity IDs or other account information.
 - Use PNG at sufficient resolution for LinkedIn and blog display.
 - Use the same page order everywhere.
+
+## Privacy and governance gate
+
+- Publish only the bundled synthetic/anonymized workbook and documented PBIP assets.
+- Confirm ignored `.pbi` cache/settings files are not tracked.
+- Search tracked content for credentials, tokens, private URLs, emails and local paths before release.
+- Confirm the public Git author identity/email is intentional; changing historical commits is a separate destructive decision and is not part of routine cleanup.
+- If this case study is ever connected to real data, complete a new security review covering access control, row-level security, sensitivity labels, export policy and retention. The current synthetic portfolio review does not approve a production deployment.

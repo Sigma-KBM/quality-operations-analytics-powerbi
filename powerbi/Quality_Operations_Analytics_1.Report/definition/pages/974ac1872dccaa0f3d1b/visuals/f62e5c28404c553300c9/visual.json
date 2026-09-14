@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
-  "name": "916e115d49710b063c29",
+  "name": "f62e5c28404c553300c9",
   "position": {
-    "x": 960,
-    "y": 431.09563943614165,
-    "z": 25000,
-    "height": 48,
-    "width": 272,
-    "tabOrder": 25000
+    "x": 968,
+    "y": 120,
+    "z": 28000,
+    "height": 24,
+    "width": 280,
+    "tabOrder": 28000
   },
   "visual": {
     "visualType": "textbox",
@@ -19,10 +19,10 @@
               {
                 "textRuns": [
                   {
-                    "value": "OUTBOUND PERFORMANCE",
+                    "value": "Complete weeks only — partial weeks are excluded.",
                     "textStyle": {
-                      "fontWeight": "bold",
-                      "fontSize": "11pt"
+                      "fontSize": "8pt",
+                      "color": "#6b7280"
                     }
                   }
                 ],

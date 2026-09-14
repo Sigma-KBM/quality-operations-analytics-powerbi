@@ -4,7 +4,7 @@
   "position": {
     "x": 32,
     "y": 212,
-    "z": 14000,
+    "z": 15031,
     "height": 468,
     "width": 608,
     "tabOrder": 1000
@@ -416,6 +416,19 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Defect categories ranked by volume with cumulative percentage; partial weeks are excluded.'"
                 }
               }
             }

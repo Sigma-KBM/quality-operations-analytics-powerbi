@@ -64,19 +64,44 @@ Full-week baseline:
 - [x] Outbound Completion ≈ 104.7% / GREEN
 - [x] Actual, target, gap, completion and status change coherently under date filters.
 
+### Time-scope policy
+
+- [x] Executive Overview includes all selected dates.
+- [x] Auditor Performance includes all selected dates.
+- [x] Quality Trends excludes partial weeks.
+- [x] Defect Analysis excludes partial weeks.
+- [x] Operational Performance excludes partial weeks.
+- [x] A concise visible note on the three full-week pages prevents comparison of unlike totals without context.
+
+### Target governance
+
+- [x] Displayed DPV target is governed by fixed DAX value 0.14.
+- [x] Displayed ADR target is governed by fixed DAX value 3.50.
+- [x] Operational and auditor targets are read from `Fact_OperationalTargets` in the active context.
+- [x] Future target changes must update the governed source and documentation together and rerun validation.
+
 ### Visual QA
 
 - [x] Five pages use a consistent executive design language.
 - [x] Defect Pareto uses blue/teal rather than exception red.
 - [x] Operational Performance status labels do not clip.
 - [x] Auditor Performance redundant subtitle removed.
+- [x] `Aditor Performance` corrected to `Auditor Performance`.
 - [x] GREEN/YELLOW/RED reserved for status/exception meaning.
+- [x] Auditor Status retains explicit text plus font color; solid status backgrounds were intentionally rejected to preserve the banded-table design.
 
 ## Publication checks still required
 
-- [ ] Export five final screenshots from the validated Desktop master.
-- [ ] Review screenshots at 100% for accidental selection outlines/tooltips.
-- [ ] Confirm no local usernames/paths are visible in screenshots.
+- [x] Run `python scripts/validate_portfolio.py` successfully from the repository root.
+- [x] Add meaningful alt text to the principal analytical visuals.
+- [x] Configure and review keyboard navigation and tab order on every page.
+- [x] Retain explicit text in addition to status color; no independent WCAG certification is claimed.
+- [x] Confirm the three full-week pages visibly disclose that partial weeks are excluded.
+- [x] Export five final screenshots from the validated Desktop master.
+- [x] Review screenshots at 100% for accidental selection outlines/tooltips.
+- [x] Confirm no Power BI account name, local username, local path, tooltip, selection outline or authoring pane is visible in screenshots.
+- [x] Confirm the Git author email shown publicly is the intended `sigma-emprende.com` address.
+- [ ] Confirm no `.pbi` cache/settings files, credentials, connection secrets or non-synthetic data are tracked.
 - [ ] Create GitHub repository and replace placeholder screenshot section with exported images.
 - [ ] Update GitHub URL in blog/LinkedIn copy after repository creation.
-- [ ] Verify licensing choice before public release.
+- [x] Confirm MIT as the intended public repository license.

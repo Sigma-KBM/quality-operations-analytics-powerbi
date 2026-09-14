@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
   "name": "1e460677dbdf9418aa51",
   "position": {
-    "x": 192.00000000000003,
-    "y": 144,
+    "x": 192,
+    "y": 136,
     "z": 9000,
-    "height": 512,
-    "width": 928.00000000000011,
+    "height": 520,
+    "width": 928,
     "tabOrder": 9000
   },
   "visual": {
@@ -135,16 +135,16 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "Dim_Auditor"
+                    "Entity": "_Measures"
                   }
                 },
-                "Property": "AuditorName"
+                "Property": "Auditor Status"
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
           }
         ]
       }
@@ -405,7 +405,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Aditor Performance'"
+                  "Value": "'Auditor Performance'"
                 }
               }
             },
@@ -479,6 +479,19 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Auditor actual workload compared with target, including gap, compliance percentage and status.'"
                 }
               }
             }

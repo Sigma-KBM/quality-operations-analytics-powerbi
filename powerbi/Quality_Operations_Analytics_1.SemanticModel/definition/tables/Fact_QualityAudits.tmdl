@@ -80,15 +80,6 @@ table Fact_QualityAudits
 
 		annotation SummarizationSetBy = Automatic
 
-	column AccessoryDefects
-		dataType: int64
-		formatString: 0
-		lineageTag: 110fe011-f9ae-4ea3-a50a-e234f2a29482
-		summarizeBy: sum
-		sourceColumn: AccessoryDefects
-
-		annotation SummarizationSetBy = Automatic
-
 	column PerformanceDefects
 		dataType: int64
 		formatString: 0
@@ -165,6 +156,15 @@ table Fact_QualityAudits
 		lineageTag: 177481d2-ebd0-4497-b865-bf5483189c07
 		summarizeBy: none
 		sourceColumn: DataSource
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccessoryDefects
+		dataType: int64
+		formatString: 0
+		lineageTag: 110fe011-f9ae-4ea3-a50a-e234f2a29482
+		summarizeBy: sum
+		sourceColumn: AccessoryDefects
 
 		annotation SummarizationSetBy = Automatic
 

@@ -5,8 +5,8 @@ A five-page Power BI case study that combines quality defects, audit compliance,
 > **Portfolio disclaimer:** This repository uses synthetic/anonymized data created for demonstration. It contains no real employee, customer, supplier, facility, or confidential operational data. The case study is inspired by common real-world quality and operations analytics workflows, not by a publishable copy of an internal company dashboard.
 
 
-### Portable local data path
-The PBIP expects the bundled workbook at `C:\qoa_portfolio\data\quality_operations_synthetic.xlsx` for a clean, user-independent local path.
+### Validated local data path
+The PBIP currently expects the bundled workbook at `C:\qoa_portfolio\data\quality_operations_synthetic.xlsx`. This is the Desktop-validated development path, not a portable or user-independent path. On another machine, repoint the source from Power BI Desktop as described below.
 
 ## Business problem
 
@@ -35,6 +35,8 @@ Quality and operations teams often review defect performance, auditor execution,
 - **Outbound Completion %** = Outbound Actual / Outbound Target.
 - Operational targets are filtered by time context and the corresponding process metric.
 - Status colors are reserved for performance state: green, yellow and red.
+
+The report's displayed DPV and ADR targets are governed by the fixed DAX values above. Any DPV/ADR target-like fields retained in the synthetic target workbook are scenario metadata and are not the source used by the current visuals. Operational and auditor targets remain context-sensitive and come from `Fact_OperationalTargets`.
 
 ## Data model
 
@@ -74,7 +76,7 @@ With global filters reset to All, the desktop-validated report reconciles to:
 | Outbound Actual | 5,053 |
 | Outbound Target | 4,830 |
 
-The Defect Analysis and Operational Performance pages intentionally exclude partial weeks for their full-week analytical views.
+Quality Trends, Defect Analysis and Operational Performance intentionally exclude partial weeks for their full-week analytical views. Executive Overview and Auditor Performance include all selected dates. Because this scope difference is not yet stated on the report canvas, compare page totals only after accounting for that rule.
 
 ## Design system
 
@@ -97,6 +99,8 @@ The report uses a compact tab-style page navigator, synchronized Year/Month/Week
 3. The development master was validated in Power BI Desktop using the original local Excel source path. If the source path is unavailable on your machine, use **Transform data > Data source settings** (or Power Query) to point the workbook source to `data/quality_operations_synthetic.xlsx`.
 4. Refresh the model and verify the QA checklist in `docs/qa_and_release_checklist.md`.
 
+For a repeatable pre-release data and structure check, install the development dependency with `python -m pip install -r requirements-dev.txt`, then run `python scripts/validate_portfolio.py` from the repository root. On Windows installations that expose the Python launcher instead, use `py` in place of `python`.
+
 Do not edit report definition files externally merely to change visual formatting; the final visual changes for this case study were saved and validated from Power BI Desktop.
 
 ## Tools and skills demonstrated
@@ -113,6 +117,7 @@ At the full-year baseline, DPV is above its 0.14 target while ADR is below its 3
 - Operational/quality definitions are case-study definitions and should not be interpreted as an external industry standard.
 - The source workbook is local-file based; a production implementation would normally use governed enterprise sources and deployment-specific parameters.
 - Custom visuals may require installation/approval in another Power BI environment.
+- Accessibility controls include alt text for the principal analytical visuals, keyboard/tab-order configuration, textual status labels and visible full-week scope notes. This portfolio has not undergone an independent WCAG conformance certification.
 
 ## Repository structure
 

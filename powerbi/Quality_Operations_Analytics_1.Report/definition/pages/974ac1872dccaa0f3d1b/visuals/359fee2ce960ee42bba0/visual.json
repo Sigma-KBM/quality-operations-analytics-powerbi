@@ -4,7 +4,7 @@
   "position": {
     "x": 32,
     "y": 304,
-    "z": 4000,
+    "z": 28015,
     "height": 192,
     "width": 912,
     "tabOrder": 1000
@@ -114,6 +114,19 @@
               "expr": {
                 "Literal": {
                   "Value": "'center'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Weekly Outbound audits compared with context-sensitive targets; partial weeks are excluded.'"
                 }
               }
             }
