@@ -76,7 +76,7 @@ With global filters reset to All, the desktop-validated report reconciles to:
 | Outbound Actual | 5,053 |
 | Outbound Target | 4,830 |
 
-Quality Trends, Defect Analysis and Operational Performance intentionally exclude partial weeks for their full-week analytical views. Executive Overview and Auditor Performance include all selected dates. Because this scope difference is not yet stated on the report canvas, compare page totals only after accounting for that rule.
+Quality Trends, Defect Analysis and Operational Performance intentionally exclude partial weeks for their full-week analytical views. Executive Overview and Auditor Performance include all selected dates. The three full-week analytical pages disclose this rule directly on the report canvas.
 
 ## Design system
 
@@ -136,8 +136,9 @@ quality-operations-analytics-powerbi/
 ## Author / case study
 
 **Quality Operations Analytics Portfolio**  
-BTN Insights: https://btninsights.blogspot.com/  
-LinkedIn: https://www.linkedin.com/in/marinmanuel
+BTN Insights case study: https://btninsights.blogspot.com/2026/09/building-quality-operations-analytics.html  
+LinkedIn project post: https://lnkd.in/p/gjbAJNJ5  
+LinkedIn profile: https://www.linkedin.com/in/marinmanuel
 
 ## Dashboard gallery
 

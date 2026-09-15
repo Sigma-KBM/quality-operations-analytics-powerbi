@@ -90,7 +90,7 @@ Full-week baseline:
 - [x] GREEN/YELLOW/RED reserved for status/exception meaning.
 - [x] Auditor Status retains explicit text plus font color; solid status backgrounds were intentionally rejected to preserve the banded-table design.
 
-## Publication checks still required
+## Publication checks completed
 
 - [x] Run `python scripts/validate_portfolio.py` successfully from the repository root.
 - [x] Add meaningful alt text to the principal analytical visuals.
@@ -101,7 +101,10 @@ Full-week baseline:
 - [x] Review screenshots at 100% for accidental selection outlines/tooltips.
 - [x] Confirm no Power BI account name, local username, local path, tooltip, selection outline or authoring pane is visible in screenshots.
 - [x] Confirm the Git author email shown publicly is the intended `sigma-emprende.com` address.
-- [ ] Confirm no `.pbi` cache/settings files, credentials, connection secrets or non-synthetic data are tracked.
-- [ ] Create GitHub repository and replace placeholder screenshot section with exported images.
-- [ ] Update GitHub URL in blog/LinkedIn copy after repository creation.
+- [x] Confirm no `.pbi` cache/settings files, credentials, connection secrets or non-synthetic data are tracked.
+- [x] Create GitHub repository and replace placeholder screenshot section with exported images.
+- [x] Update the final GitHub URL in the BTN Insights article copy.
+- [x] Update the BTN Insights URL in the LinkedIn copy after the article is published.
+- [x] Publish the BTN Insights case study and record its final URL.
+- [x] Publish the LinkedIn portfolio post and record its final URL.
 - [x] Confirm MIT as the intended public repository license.

@@ -205,7 +205,7 @@ Quality Operations Analytics demonstrates how Power BI can connect data modeling
 
 The most valuable part of the project was not any one visual. It was ensuring that the model, filters, targets, status logic and presentation all told the same story.
 
-**Project repository:** [ADD FINAL GITHUB URL]
+**Project repository:** https://github.com/Sigma-KBM/quality-operations-analytics-powerbi
 
 **LinkedIn:** https://www.linkedin.com/in/marinmanuel
 

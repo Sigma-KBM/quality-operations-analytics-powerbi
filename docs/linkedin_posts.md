@@ -1,5 +1,7 @@
 # LinkedIn Publication Copy
 
+**Published post:** https://lnkd.in/p/gjbAJNJ5
+
 ## Main post
 
 **I rebuilt a real-world Quality & Operations reporting workflow as a synthetic Power BI case study — and the most important work happened after the charts were built.**
@@ -27,8 +29,8 @@ One of my biggest takeaways was that BI validation goes beyond getting DAX to re
 
 **Data disclaimer:** All data shown in this project is synthetic/anonymized and created for portfolio demonstration. No confidential company, employee, customer, supplier or facility data is included.
 
-Full case study: [ADD BTN INSIGHTS URL]
-GitHub: [ADD GITHUB URL]
+Full case study: https://btninsights.blogspot.com/2026/09/building-quality-operations-analytics.html
+GitHub: https://github.com/Sigma-KBM/quality-operations-analytics-powerbi
 
 What do you consider the most important QA step before calling a Power BI dashboard production- or portfolio-ready?
 
@@ -53,8 +55,8 @@ The part I valued most was the QA: I reconciled the dashboard to the dataset and
 
 All published data is synthetic/anonymized; no confidential operational information is included.
 
-GitHub: [ADD GITHUB URL]
-Case study: [ADD BTN INSIGHTS URL]
+GitHub: https://github.com/Sigma-KBM/quality-operations-analytics-powerbi
+Case study: https://btninsights.blogspot.com/2026/09/building-quality-operations-analytics.html
 
 #PowerBI #DataAnalytics #BusinessIntelligence #DataVisualization
 
